@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.onlineeducation.dao.UserLearningRecordsDao">
+    <resultMap id="user_learning_recordsResultMap" type="com.example.onlineeducation.entity.user_learning_records">
+        <id column="record_id" property="recordId"/>
+        <result column="user_id" property="userId"/>
+        <result column="course_id" property="courseId"/>
+        <result column="progress" property="progress"/>
+        <result column="learning_duration" property="learningDuration"/>
+        <result column="learning_time" property="learningTime"/>
+    </resultMap>
+
+    <select id="findById" resultMap="user_learning_recordsResultMap">
+        SELECT * FROM user_learning_records WHERE record_id = #{id}
+    </select>
+
+    <insert id="save" parameterType="com.example.onlineeducation.entity.user_learning_records">
+        INSERT INTO user_learning_records (user_id, course_id, progress, learning_duration, learning_time)
+        VALUES (#{userId}, #{courseId}, #{progress}, #{learningDuration}, #{learningTime})
+    </insert>
+
+    <update id="update" parameterType="com.example.onlineeducation.entity.user_learning_records">
+        UPDATE user_learning_records
+        SET user_id = #{userId}, course_id = #{courseId}, progress = #{progress}, learning_duration = #{learningDuration}, learning_time = #{learningTime}
+        WHERE record_id = #{recordId}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM user_learning_records WHERE record_id = #{id}
+    </delete>
+    <select id="findByUserId" resultType="com.example.onlineeducation.entity.user_learning_records">
+        SELECT * FROM user_learning_records WHERE user_id = #{userId}
+    </select>
+</mapper>

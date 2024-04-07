@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.onlineeducation.dao.ClassMemberDao">
+
+    <resultMap id="classMemberMap" type="com.example.onlineeducation.entity.class_members">
+        <id property="memberId" column="member_id"/>
+        <result property="classId" column="class_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="joinTime" column="join_time"/>
+    </resultMap>
+
+    <select id="findById" resultMap="classMemberMap">
+        SELECT * FROM class_members WHERE member_id = #{id}
+    </select>
+
+    <insert id="save" parameterType="com.example.onlineeducation.entity.class_members">
+        INSERT INTO class_members (class_id, user_id, join_time)
+        VALUES (#{classId}, #{userId}, #{joinTime})
+    </insert>
+
+    <update id="update" parameterType="com.example.onlineeducation.entity.class_members">
+        UPDATE class_members
+        SET class_id = #{classId}, user_id = #{userId}, join_time = #{joinTime}
+        WHERE member_id = #{memberId}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM class_members WHERE member_id = #{id}
+    </delete>
+
+</mapper>

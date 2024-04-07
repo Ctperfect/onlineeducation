@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.onlineeducation.dao.UserCourseScoresDao">
+
+    <resultMap id="userCourseScoresMap" type="com.example.onlineeducation.entity.user_course_scores">
+        <id property="recordId" column="record_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="courseId" column="course_id"/>
+        <result property="score" column="score"/>
+    </resultMap>
+
+    <select id="findById" resultMap="userCourseScoresMap">
+        SELECT * FROM user_course_scores WHERE record_id = #{id}
+    </select>
+    <!-- 根据用户ID查询所有课程分数 -->
+    <select id="findByUserId" resultMap="userCourseScoresMap">
+        SELECT * FROM user_course_scores WHERE user_id = #{userId}
+    </select>
+
+    <insert id="save" parameterType="com.example.onlineeducation.entity.user_course_scores">
+        INSERT INTO user_course_scores (user_id, course_id, score) VALUES (#{userId}, #{courseId}, #{score})
+    </insert>
+
+    <update id="update" parameterType="com.example.onlineeducation.entity.user_course_scores">
+        UPDATE user_course_scores SET user_id = #{userId}, course_id = #{courseId}, score = #{score} WHERE record_id = #{recordId}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM user_course_scores WHERE record_id = #{id}
+    </delete>
+
+</mapper>

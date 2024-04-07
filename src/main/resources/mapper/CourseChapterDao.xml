@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.onlineeducation.dao.CourseChapterDao">
+
+    <resultMap id="courseChapterMap" type="com.example.onlineeducation.entity.course_chapters">
+        <id property="chapterId" column="chapter_id"/>
+        <result property="courseId" column="course_id"/>
+        <result property="chapterContent" column="chapter_content"/>
+        <result property="teacherId" column="teacher_id"/>
+        <result property="videoLink" column="video_link"/>
+    </resultMap>
+
+    <select id="findById" resultMap="courseChapterMap">
+        SELECT * FROM course_chapters WHERE chapter_id = #{id}
+    </select>
+
+    <insert id="save" parameterType="com.example.onlineeducation.entity.course_chapters">
+        INSERT INTO course_chapters (course_id, chapter_content, teacher_id, video_link)
+        VALUES (#{courseId}, #{chapterContent}, #{teacherId}, #{videoLink})
+    </insert>
+
+    <update id="update" parameterType="com.example.onlineeducation.entity.course_chapters">
+        UPDATE course_chapters
+        SET course_id = #{courseId}, chapter_content = #{chapterContent},
+            teacher_id = #{teacherId}, video_link = #{videoLink}
+        WHERE chapter_id = #{chapterId}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM course_chapters WHERE chapter_id = #{id}
+    </delete>
+    <!-- 根据课程id查询所有章节 -->
+    <select id="findAllChaptersByCourseId" resultMap="courseChapterMap" parameterType="int">
+        SELECT * FROM course_chapters WHERE course_id = #{courseId}
+    </select>
+
+</mapper>

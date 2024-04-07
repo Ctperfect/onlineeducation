@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.onlineeducation.dao.TeacherReviewDao">
+
+    <resultMap id="teacherReviewMap" type="com.example.onlineeducation.entity.teacher_reviews">
+        <id property="reviewId" column="review_id"/>
+        <result property="teacherId" column="teacher_id"/>
+        <result property="studentId" column="student_id"/>
+        <result property="reviewContent" column="review_content"/>
+        <result property="reviewTime" column="review_time"/>
+    </resultMap>
+
+    <select id="findById" resultMap="teacherReviewMap">
+        SELECT * FROM teacher_reviews WHERE review_id = #{id}
+    </select>
+
+    <insert id="save" parameterType="com.example.onlineeducation.entity.teacher_reviews">
+        INSERT INTO teacher_reviews (teacher_id, student_id, review_content, review_time)
+        VALUES (#{teacherId}, #{studentId}, #{reviewContent}, #{reviewTime})
+    </insert>
+
+    <update id="update" parameterType="com.example.onlineeducation.entity.teacher_reviews">
+        UPDATE teacher_reviews
+        SET teacher_id = #{teacherId}, student_id = #{studentId}, review_content = #{reviewContent}, review_time = #{reviewTime}
+        WHERE review_id = #{reviewId}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM teacher_reviews WHERE review_id = #{id}
+    </delete>
+
+</mapper>

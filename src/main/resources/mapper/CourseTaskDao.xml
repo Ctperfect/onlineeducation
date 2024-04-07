@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.onlineeducation.dao.CourseTaskDao">
+
+    <resultMap id="courseTaskMap" type="com.example.onlineeducation.entity.course_tasks">
+        <id property="taskId" column="task_id"/>
+        <result property="courseId" column="course_id"/>
+        <result property="taskContent" column="task_content"/>
+        <result property="taskType" column="task_type"/>
+    </resultMap>
+
+    <select id="findById" resultMap="courseTaskMap">
+        SELECT * FROM course_tasks WHERE task_id = #{id}
+    </select>
+
+    <select id="findAllByCourseId" resultMap="courseTaskMap" parameterType="int">
+        SELECT * FROM course_tasks WHERE course_id = #{courseId}
+    </select>
+
+    <insert id="save" parameterType="com.example.onlineeducation.entity.course_tasks">
+        INSERT INTO course_tasks (course_id, task_content, task_type)
+        VALUES (#{courseId}, #{taskContent}, #{taskType})
+    </insert>
+
+    <update id="update" parameterType="com.example.onlineeducation.entity.course_tasks">
+        UPDATE course_tasks
+        SET course_id = #{courseId}, task_content = #{taskContent}, task_type = #{taskType}
+        WHERE task_id = #{taskId}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM course_tasks WHERE task_id = #{id}
+    </delete>
+
+</mapper>

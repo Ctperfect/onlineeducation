@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.onlineeducation.dao.UserDao">
+
+    <!-- 创建用户 -->
+    <insert id="createUser" parameterType="com.example.onlineeducation.entity.users">
+        INSERT INTO users (user_id,username, password, registration_time)
+        VALUES (#{userId},#{username}, #{password}, #{registrationTime})
+    </insert>
+
+    <!-- 根据用户ID删除用户 -->
+    <delete id="deleteUserById">
+        DELETE FROM users WHERE user_id = #{userId}
+    </delete>
+    <!-- 根据用户ID查询用户 -->
+    <select id="getUserById" resultType="com.example.onlineeducation.entity.users" parameterType="int">
+        SELECT * FROM users WHERE user_id = #{userId}
+    </select>
+
+    <!-- 更新用户信息 -->
+    <update id="updateUser" parameterType="com.example.onlineeducation.entity.users">
+        UPDATE users
+        SET username = #{username}, password = #{password}, registration_time = #{registrationTime}
+        WHERE user_id = #{userId}
+    </update>
+
+    <!-- 根据用户名查询用户 -->
+    <select id="getUserByUsername" resultType="com.example.onlineeducation.entity.users" parameterType="String">
+        SELECT * FROM users WHERE username = #{username}
+    </select>
+
+    <!-- 获取所有用户 -->
+    <select id="getAllUsers" resultType="com.example.onlineeducation.entity.users">
+        SELECT * FROM users
+    </select>
+
+</mapper>

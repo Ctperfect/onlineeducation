@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.onlineeducation.dao.CourseDao">
+
+    <resultMap id="courseMap" type="com.example.onlineeducation.entity.courses">
+        <id property="courseId" column="course_id"/>
+        <result property="courseName" column="course_name"/>
+        <result property="courseDescription" column="course_description"/>
+    </resultMap>
+
+    <select id="findById" resultMap="courseMap">
+        SELECT * FROM courses WHERE course_id = #{id}
+    </select>
+
+    <select id="getAllCourses" resultMap="courseMap">
+        SELECT * FROM courses
+    </select>
+
+    <insert id="save" parameterType="com.example.onlineeducation.entity.courses">
+        INSERT INTO courses (course_name, course_description)
+        VALUES (#{courseName}, #{courseDescription})
+    </insert>
+
+    <update id="update" parameterType="com.example.onlineeducation.entity.courses">
+        UPDATE courses
+        SET course_name = #{courseName}, course_description = #{courseDescription}
+        WHERE course_id = #{courseId}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM courses WHERE course_id = #{id}
+    </delete>
+
+</mapper>
