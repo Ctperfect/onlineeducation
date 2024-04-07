@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/course-tasks")
+@CrossOrigin
 public class CourseTaskController {
 
     private final CourseTaskService courseTaskService;

@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/user_course_scores")
+@CrossOrigin
 public class UserCourseScoresController {
 
     private final UserCourseScoresService userCourseScoresService;
